@@ -8,18 +8,9 @@ tests_requirements = [
     'pytest'
 ]
 
-class upload(upload_orig):
-
-    def finalize_options(self):
-        super().finalize_options()
-        self.repository = os.environ.get('PYPI_URL', self.repository)
-        self.username = os.environ.get('PYPI_USERNAME', self.username)
-        self.password = os.environ.get('PYPI_PASSWORD', self.password)
-
-
 setup(
     name='mappers',
-    version='0.0.1',
+    version='0.1.0',
     description="""Mapping of complex data""",
     author='Vsevolod Glumov, Michael Vostrykh',
     author_email='vaglumov@domclick.ru, MAVostrykh@domclick.ru',
@@ -36,8 +27,5 @@ setup(
       'Programming Language :: Python :: 3',
       'Programming Language :: Python :: 3.6',
     ],
-    tests_require=tests_requirements,
-    cmdclass={
-        'upload': upload,
-    }
+    tests_require=tests_requirements
 )
