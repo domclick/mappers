@@ -27,7 +27,7 @@ class Key(object):
             try:
                 value = self.type_cast(value)
             except:
-                logger.warning("Can't type cast {} into {}".format(value, self.type_cast))
+                logger.warning(f"Key {self.key}: can't type cast {value} into {self.type_cast.__name__}")
         return value
 
     def __set__(self, obj, value):
@@ -38,7 +38,7 @@ class Key(object):
             try:
                 value = self.type_cast(value)
             except:
-                logger.warning("Can't type cast {} into {}".format(value, self.type_cast))
+                logger.warning(f"Key {self.key}: can't type cast {value} into {self.type_cast.__name__}")
                 return
 
         set_in(obj._data, self.key_path, value)

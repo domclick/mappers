@@ -10,7 +10,7 @@ tests_requirements = [
 
 setup(
     name='mappers',
-    version='0.1.0',
+    version='0.1.1',
     description="""Mapping of complex data""",
     author='Vsevolod Glumov, Michael Vostrykh',
     author_email='vaglumov@domclick.ru, MAVostrykh@domclick.ru',
