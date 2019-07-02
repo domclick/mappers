@@ -53,4 +53,4 @@ class BaseMapper:
         self._data = data
         for field in self._required_keys:
             if not hasattr(self, field):
-                raise MapperException('Missing required field {}'.format(field), 400)
+                raise MapperException('Missing required field {}'.format(field))
