@@ -1,4 +1,4 @@
-# What is this?
+## What is this?
 
 Mappers simplify operations on complex multilevel JSON data. They allow to 
 abstract away the hierarchy, reperesenting data as a flat model class.
