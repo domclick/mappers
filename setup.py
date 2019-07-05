@@ -10,10 +10,10 @@ tests_requirements = [
 
 setup(
     name='mappers',
-    version='0.1.1',
-    description="""Mapping of complex data""",
+    version='1.0.0',
+    description="""Abstracting complex multilevel dict data""",
     author='Vsevolod Glumov, Michael Vostrykh',
-    author_email='vaglumov@domclick.ru, MAVostrykh@domclick.ru',
+    author_email='seva17@gmail.com, MAVostrykh@domclick.ru',
     url='',
     packages=find_packages(exclude=('tests', )),
     dependency_links=[],
