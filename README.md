@@ -1,27 +1,32 @@
-# Mappers
+# What is this?
 
-Мапперы позволяют быстро приводить многоуровневые словари к плоской структуре. 
+Mappers simplify operations on complex multilevel JSON data. They allow to 
+abstract away the hierarchy, reperesenting data as a flat model class.
 
-## Как пользоваться
+## How to use it?
 
-Определяем маппер следующим образом.
+You can create a new mapper by inheriting from `BaseMapper` and adding `Key` 
+objects as attributes. You don't have to define every key present in the source 
+JSON, only the ones you actually need.
 
 ``` py
 from mappers import BaseMapper, Key
 
 class AwesomeMapper(BaseMapper):
-    # значения первого уровня мапятся как в обычном словаре
+    # first level keys are mapped as simple string names
     foo = Key("foo")
-    # значения на несколько уровней в глубину мапятся через tuple с путем
-    # при наличие флага allow_setter мы сможем устанавливать значение через mapper
+    # several levels deep values are mapped with a path tuple
+    # allow_setter flag allows for data to be set through the attribute
     bar = Key(("onelevel", "secondlevel", "bar"), allow_setter=True)
-    # значения могут приводиться к опред. типу при получении
+    # value types can be cast on the fly
+    # key would quietly return an original type if cast is unsuccesful
     number = Key("number", type_cast=int)
-    # отсутствующие значения будут автоматически возврщены как None
+    # values absent in the source JSON are quietly returned as None
     label = Key("label")
 ```
 
-Инициализируем маппер сложным словарем с данными.
+Initialize the mapper by passing complex JSON data to its constructor.
+
 ``` python
 structure = {
     "foo": "ololo",
@@ -35,21 +40,24 @@ structure = {
 awesome_mapper = AwesomeMapper(structure)
 ```
 
-Теперь предопределенные значения можно доставать без работы с многоуровневым словарем.
+Now values may be accessed without working with multilevel JSON structure. One 
+can forget about constructs like 
+`data.get("onelevel", {}).get("secondlevel", {}).get("bar")`.
 
 ``` python
 assert awesome_mapper.foo == "ololo"
 assert awesome_mapper.bar == "trololo"
 assert awesome_mapper.number == 34
 assert awesome_mapper.label == None
-# мы можем устанавливать значение для аттрибутов с allow_setter
+# we can set attributes with allow_setter flag
 awesome_mapper.bar = "whoa!"
 assert awesome_mapper.bar == "whoa!"
 ```
 
-Изначальная структура сохраняется в `_data` без изменением, за исключением переопределения значений.
+Source structure and values are preserved in `_data` except for cases when 
+setter is used.
 
-Также, в качестве конвенции, можно добавить самые распространенные форматы выдачи данных в виде свойств:
+As a convention one can use properties to add alternative data representations.
 
 ``` python
 @property
