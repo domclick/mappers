@@ -9,6 +9,7 @@ from .utils import get_in, set_in
 logger = logging.getLogger("mappers")
 
 class Key(object):
+    """ Key object is an alias to a dict key in multilevel structure."""
 
     def __init__(self, key, type_cast=None, allow_setter=False, default=None):
         self.key = key
@@ -45,6 +46,7 @@ class Key(object):
 
 
 class BaseMapper:
+    """Mapper is a flat model class for abstracting away multilevel dict data"""
 
     _required_keys = []
 
